@@ -630,35 +630,43 @@ $(document).ready(() => {
   } catch (error) { }
 });
 
-
 function showCalendar(element) {
   $(document).ready(() => {
-    try {
-      $(element).calendar({
-        type: 'datetime', // 显示日期和时间
-        text: {
-            days: ['日', '一', '二', '三', '四', '五', '六'],
-            months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            monthsShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            today: '今天',
-            now: '现在',
-            am: '上午',
-            pm: '下午'
-        },
-        formatter: {
-            datetime: function (date, settings) {
-                if (!date) return '';
-                var day = ('0' + date.getDate()).slice(-2);
-                var month = ('0' + (date.getMonth() + 1)).slice(-2);
-                var year = date.getFullYear();
-                var hour = ('0' + date.getHours()).slice(-2);
-                var minute = ('0' + date.getMinutes()).slice(-2);
-                var second = ('0' + date.getSeconds()).slice(-2);
-                return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-            }
-        }
-      });
-    } catch (error) { }
-  });  
+    var language = $('#subscription').data('language') ? $('#subscription').data('language') : 'zh-CN';
+    if(language === 'zh-CN') {
+      try {
+        $(element).calendar({
+          type: 'datetime', // 显示日期和时间
+          text: {
+              days: ['日', '一', '二', '三', '四', '五', '六'],
+              months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+              monthsShort: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+              today: '今天',
+              now: '现在',
+              am: '上午',
+              pm: '下午'
+          },
+          formatter: {
+              datetime: function (date, settings) {
+                  if (!date) return '';
+                  var day = ('0' + date.getDate()).slice(-2);
+                  var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                  var year = date.getFullYear();
+                  var hour = ('0' + date.getHours()).slice(-2);
+                  var minute = ('0' + date.getMinutes()).slice(-2);
+                  var second = ('0' + date.getSeconds()).slice(-2);
+                  return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+              }
+          }
+        });
+      } catch (error) { }
+    } else {
+      try {
+        $(element).calendar({
+          type: 'datetime', // 显示日期和时间
+        });
+      } catch (error) { }
+    }
+  });
 }
 

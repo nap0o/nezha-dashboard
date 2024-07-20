@@ -41,7 +41,7 @@
                         <option value="请选择">请选择</option>
                         <option value=1>年</option>
                         <option value=2>季</option>
-                        <option value=4>月</option>
+                        <option value=3>月</option>
                         <option value=4>周</option>
                         <option value=0>永久</option>
                     </select>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="field">
                     <label>到期时间</label>
-                    <div class="ui calendar" id="subscription">
+                    <div class="ui calendar" id="subscription" data-language="{{.Conf.Language}}">
                           <div class="ui input left icon">
                                 <i class="calendar icon"></i>
                                 <input name="subscription_expiry_data" type="text" placeholder="">
@@ -151,5 +151,4 @@
         </button>
     </div>
 </div>
-
 {{end}}
