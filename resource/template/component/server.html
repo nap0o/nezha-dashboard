@@ -5,52 +5,126 @@
         <form id="serverForm" class="ui form">
             <input type="hidden" name="id">
             <div class="field">
-                <label>{{tr "Name"}}</label>
-                <input type="text" name="name" placeholder="{{tr "EinsteinLightspeed1"}}">
+                <label>基础设置</label>
             </div>
-            <div class="field">
-                <label>{{tr "ServerGroup"}}</label>
-                <input type="text" name="Tag" placeholder="{{tr "ServerGroup"}}">
-            </div>
-            <div class="field">
-                <label>{{tr "DisplayIndex"}}</label>
-                <input type="number" name="DisplayIndex" placeholder="{{tr "TheLargerTheNumberTheHigherThePriority"}}">
-            </div>
-            <div class="secret field">
-                <label>{{tr "Secret"}}</label>
-                <input type="text" name="secret">
-            </div>
-            <div class="field">
-                <div class="ui hideforguest checkbox">
-                    <input name="HideForGuest" type="checkbox" tabindex="0" class="hidden" />
-                    <label>{{tr "HideForGuest"}}</label>
+            <div class="ui segment">
+                <div class="field">
+                    <label>{{tr "Name"}}</label>
+                    <input type="text" name="name" placeholder="{{tr "EinsteinLightspeed1"}}">
+                </div>
+                <div class="field">
+                    <label>{{tr "ServerGroup"}}</label>
+                    <input type="text" name="Tag" placeholder="{{tr "ServerGroup"}}">
+                </div>
+                <div class="field">
+                    <label>{{tr "DisplayIndex"}}</label>
+                    <input type="number" name="DisplayIndex" placeholder="{{tr "TheLargerTheNumberTheHigherThePriority"}}">
+                </div>
+                <div class="secret field">
+                    <label>{{tr "Secret"}}</label>
+                    <input type="text" name="secret">
+                </div>
+                <div class="field">
+                    <div class="ui hideforguest checkbox">
+                        <input name="HideForGuest" type="checkbox" tabindex="0" class="hidden" />
+                        <label>{{tr "HideForGuest"}}</label>
+                    </div>
                 </div>
             </div>
             <div class="field">
-                <div class="ui enableddns checkbox">
-                    <input name="EnableDDNS" type="checkbox" tabindex="0" />
-                    <label>{{tr "EnableDDNS"}}</label>
+                <label>信息设置</label>
+            </div>
+            <div class="ui segment">
+                <div class="field">
+                    <label>付费周期</label>
+                    <select name="subscription_period" class="ui fluid dropdown">
+                        <option value="请选择">请选择</option>
+                        <option value=1>年</option>
+                        <option value=2>季</option>
+                        <option value=4>月</option>
+                        <option value=4>周</option>
+                        <option value=0>永久</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>价格</label>
+                    <input name="subscription_amount" type="text" placeholder="免费机器请留空">
+                </div>
+
+                <div class="field">
+                    <label>选择到期时间时区</label>
+                    <select name="subscription_timezone" class="ui dropdown">
+                        <option value="-12">UTC-12</option>
+                        <option value="-11">UTC-11</option>
+                        <option value="-10">UTC-10</option>
+                        <option value="-9">UTC-9</option>
+                        <option value="-8">UTC-8</option>
+                        <option value="-7">UTC-7</option>
+                        <option value="-6">UTC-6</option>
+                        <option value="-5">UTC-5</option>
+                        <option value="-4">UTC-4</option>
+                        <option value="-3">UTC-3</option>
+                        <option value="-2">UTC-2</option>
+                        <option value="-1">UTC-1</option>
+                        <option value="0">UTC</option>
+                        <option value="1">UTC+1</option>
+                        <option value="2">UTC+2</option>
+                        <option value="3">UTC+3</option>
+                        <option value="4">UTC+4</option>
+                        <option value="5">UTC+5</option>
+                        <option value="6">UTC+6</option>
+                        <option value="7">UTC+7</option>
+                        <option value="8" selected>UTC+8</option>
+                        <option value="9">UTC+9</option>
+                        <option value="10">UTC+10</option>
+                        <option value="11">UTC+11</option>
+                        <option value="12">UTC+12</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>到期时间</label>
+                    <div class="ui calendar" id="subscription">
+                          <div class="ui input left icon">
+                                <i class="calendar icon"></i>
+                                <input name="subscription_expiry_data" type="text" placeholder="">
+                          </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>到期提醒天数(默认距离到期时间5天,前台显示提示信息)</label>
+                    <input type="text" name="subscription_notification_days" placeholder="" value="5">
                 </div>
             </div>
             <div class="field">
-                <div class="ui enableipv4 checkbox">
-                    <input name="EnableIPv4" type="checkbox" tabindex="0" />
-                    <label>{{tr "EnableIPv4"}}</label>
+                <label>DDNS设置</label>
+            </div>
+            <div class="ui segment">
+                <div class="field">
+                    <div class="ui enableddns checkbox">
+                        <input name="EnableDDNS" type="checkbox" tabindex="0" />
+                        <label>{{tr "EnableDDNS"}}</label>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <div class="ui enableipv6 checkbox">
-                    <input name="EnableIpv6" type="checkbox" tabindex="0" />
-                    <label>{{tr "EnableIpv6"}}</label>
+                <div class="field">
+                    <div class="ui enableipv4 checkbox">
+                        <input name="EnableIPv4" type="checkbox" tabindex="0" />
+                        <label>{{tr "EnableIPv4"}}</label>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <label>{{tr "DDNSDomain"}}</label>
-                <input type="text" name="DDNSDomain" placeholder="{{tr "DDNSDomain"}}">
-            </div>
-            <div class="field">
-                <label>{{tr "DDNSProfile"}}</label>
-                <input type="text" name="DDNSProfile" placeholder="{{tr "DDNSProfile"}}">
+                <div class="field">
+                    <div class="ui enableipv6 checkbox">
+                        <input name="EnableIpv6" type="checkbox" tabindex="0" />
+                        <label>{{tr "EnableIpv6"}}</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>{{tr "DDNSDomain"}}</label>
+                    <input type="text" name="DDNSDomain" placeholder="{{tr "DDNSDomain"}}">
+                </div>
+                <div class="field">
+                    <label>{{tr "DDNSProfile"}}</label>
+                    <input type="text" name="DDNSProfile" placeholder="{{tr "DDNSProfile"}}">
+                </div>
             </div>
             <div class="field">
                 <label>{{tr "Note"}}</label>
@@ -77,4 +151,5 @@
         </button>
     </div>
 </div>
+
 {{end}}
