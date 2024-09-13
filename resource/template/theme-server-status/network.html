@@ -53,13 +53,11 @@
                         if (data.result) { // 数据请求成功，更新数据并渲染图表
                             this.chartDataList[id] = data.result;
                             this.$nextTick(() => {
-                                this.currentServerId = id;
-                                this.nextServerId = this.getNextServerId(id);
                                 this.renderCharts(id);
                             });
                         } else {
-                            this.nextServerId = this.getNextServerId(id);
                             console.log('this server (id:'+ id + ') has no monitor.');
+                            this.nextServerId = this.getNextServerId(id);
                         }
                     })
                     .catch(error => {
@@ -69,6 +67,8 @@
             renderCharts(id, reload = false) {
                 if(!this.chartDataList[id]) return;
                 if(this.chart) this.disposeCharts(this.chart);
+                this.currentServerId = id;
+                this.nextServerId = this.getNextServerId(id);
                 this.chartCountryCode = this.getServerCountryCode(id);
                 this.chartTitle = this.chartDataList[id][0].server_name;
                 const chartData = this.chartDataList[id];
