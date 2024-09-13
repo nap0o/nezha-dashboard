@@ -174,5 +174,5 @@ body[theme="dark"] .toolbox i{
 }
 
 body[theme="dark"] .network-box .network-box-header{
-    border-bottom: 1px solid rgba(110, 112, 121, 0.25);
+    border-bottom-color: rgba(110, 112, 121, 0.25);
 }

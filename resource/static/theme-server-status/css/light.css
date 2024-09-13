@@ -198,7 +198,7 @@ body[theme="light"] .modal-header i.xclose{
 }
 
 body[theme="light"] .network-box .network-box-header{
-    border-bottom: 1px solid rgba(224, 230, 241, 0.6);
+    border-bottom-color: rgba(224, 230, 241, 0.6);
 }
 
 @media only screen and (max-width: 767px) {

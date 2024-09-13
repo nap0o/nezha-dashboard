@@ -331,6 +331,8 @@ td.ping-network-quality {
     padding: 5px 0px 15px 5px;
     cursor: pointer;
     width: 100%;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
 
 .network-box .network-box-header .dropdown-menu {
@@ -572,6 +574,7 @@ footer p{
     .network-box .network-box-header {
         margin: 8px 0px 0px 8px;
         font-size: 16px;
+        border-bottom: none;
     }
     .network-box .chartTitle {
         font-size: 16px;
