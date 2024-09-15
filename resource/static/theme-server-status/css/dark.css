@@ -8,13 +8,10 @@ body[theme="dark"] .navbar .navbar-brand {
     color: #ffffff;
 }
 
-body[theme="dark"] .navbar .navbar-nav li.pc-active {
-    box-shadow: 0px 1px 0px rgba(73, 146, 255, 1);
-}
-
 body[theme="dark"] .navbar .navbar-nav li.pc-active a,
 body[theme="dark"] .navbar .navbar-nav li.m-active a{
     color: rgba(73, 146, 255, 1);
+    font-weight: bold;
 }
 
 body[theme="dark"] .navbar .dropdown-menu {
