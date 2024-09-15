@@ -9,11 +9,12 @@ body[theme="dark"] .navbar .navbar-brand {
 }
 
 body[theme="dark"] .navbar .navbar-nav li.pc-active {
-    box-shadow: 0px 1px 0px rgba(10, 148, 242, 1);
+    box-shadow: 0px 1px 0px rgba(73, 146, 255, 1);
 }
 
+body[theme="dark"] .navbar .navbar-nav li.pc-active a,
 body[theme="dark"] .navbar .navbar-nav li.m-active a{
-    color: rgba(10, 148, 242, 1);
+    color: rgba(73, 146, 255, 1);
 }
 
 body[theme="dark"] .navbar .dropdown-menu {
