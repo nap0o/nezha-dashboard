@@ -11,7 +11,6 @@ body[theme="dark"] .navbar .navbar-brand {
 body[theme="dark"] .navbar .navbar-nav li.pc-active a,
 body[theme="dark"] .navbar .navbar-nav li.m-active a{
     color: rgba(73, 146, 255, 1);
-    font-weight: bold;
 }
 
 body[theme="dark"] .navbar .dropdown-menu {

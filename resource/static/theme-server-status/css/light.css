@@ -23,7 +23,6 @@ body[theme="light"] .navbar .navbar-nav > li > a {
 body[theme="light"] .navbar .navbar-nav li.pc-active a,
 body[theme="light"] .navbar .navbar-nav li.m-active a {
     color: rgba(73, 146, 255, 1);
-    font-weight: bold;
 }
 
 body[theme="light"] .navbar .navbar-nav > .open > a:focus,
