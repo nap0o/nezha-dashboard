@@ -1028,31 +1028,49 @@
                 if (!note) return null;
                 const startDate = this.getNoteElementValue(note, "billingDataMod", "startDate");
                 const endDate = this.getNoteElementValue(note, "billingDataMod", "endDate");
-                
+
                 // 检查 startDate 和 endDate 是否有效
                 if (!startDate || !endDate || typeof startDate !== 'string' || typeof endDate !== 'string') {
-                    console.log("getRemainingFormat: Invalid startDate or endDate in note");
+                    //console.log("getRemainingFormat: Invalid startDate or endDate in note");
                     return null; // 如果无效，返回 null 或其他错误处理逻辑
                 }
 
-                //处理特殊时间格式
+                // 处理特殊时间格式
                 if (startDate.includes('0000-00-00') || endDate.includes("0000-00-00")) {
                     return this.formatPercents(online, this.toFixed2(100));
-                } else {
-                    const percent = this.getRemainingPercent(startDate, endDate, note);
-                    return this.formatPercents(online, this.toFixed2(percent));                    
                 }
+
+                // 检查 startDate 和 endDate 是否为合法的Date
+                if (isNaN(new Date(startDate).getTime()) || isNaN(new Date(endDate).getTime())) {
+                    return {
+                        "class": "",
+                        "style": "width: 0%",
+                        "percent": "0"
+                    }
+                }
+
+                //处理特殊时间格式
+                const percent = this.getRemainingPercent(startDate, endDate, note);
+                return this.formatPercents(online, this.toFixed2(percent));                    
+                
             },
             getRemainingDays(endDate, note) {
                 // 检查 endDate 是否有效
                 if (!endDate || typeof endDate !== 'string') {
-                    console.log("getRemainingDays: Invalid endDate format");
+                    //console.log("getRemainingDays: Invalid endDate format");
                     return null;
                 }
 
                 // 处理特殊时间格式
-                if (endDate.includes("0000-00-00")) return "lifetime";
+                if (endDate.includes("0000-00-00")) {
+                    return "lifetime";
+                }
 
+                // 检查 startDate 和 endDate 是否为合法的Date
+                if (isNaN(new Date(endDate).getTime())) {
+                    return "NaN";
+                }
+                
                 // 获取当前时间，并调整时区
                 const currentTime = this.getAdjustTimezone(new Date(endDate), new Date());
 
@@ -1078,12 +1096,20 @@
             getRemainingPercent(startDate, endDate, note) {
                 // 检查 startDate 和 endDate 是否为有效字符串并处理特殊格式
                 if (!startDate || !endDate || typeof startDate !== 'string' || typeof endDate !== 'string') {
-                    console.log("getRemainingPercent: Invalid startDate or endDate format");
+                    //console.log("getRemainingPercent: Invalid startDate or endDate format");
                     return null;
                 }
-                
-                if (startDate.includes("0000-00-00") || endDate.includes("0000-00-00")) return 100;
 
+                // 处理特殊时间格式
+                if (startDate.includes("0000-00-00") || endDate.includes("0000-00-00")) {
+                    return 100;
+                }
+
+                // 检查 startDate 和 endDate 是否为合法的Date
+                if (isNaN(new Date(startDate).getTime()) || isNaN(new Date(endDate).getTime())) {
+                    return "NaN";
+                }
+                
                 // 获取当前时间并调整时区
                 const now = this.getAdjustTimezone(new Date(endDate), new Date());
 
