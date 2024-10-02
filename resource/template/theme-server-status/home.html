@@ -1108,7 +1108,7 @@
 
                 // 计算剩余百分比
                 if (now < start) {
-                    return 0;
+                    return 0.01; //避免当条件判断!percent被过滤
                 }
                 if (now >= end) {
                     return 100;
