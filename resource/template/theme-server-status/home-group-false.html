@@ -36,8 +36,8 @@
                 <span v-else>@#getPlatformName(node.os)#@</span>
             </td>
             <td style="text-align: center;" class="node-cell location">
-                <i :class="'fi fi-' + node.location"></i>
-                <span class="node-cell-location-text text-uppercase">@#node.location#@</span>
+                <i :class="'fi fi-' + (node.location ? node.location : 'rb')"></i>
+                <span class="node-cell-location-text text-uppercase">&nbsp;@#node.location ? node.location : 'RB'#@</span>
             </td>
             <td v-if="nodesNoTag.some(item => item.additional && item.additional.price && Object.keys(item.additional.price).length > 0)" class="node-cell price center">
                 <template v-if="node.additional && node.additional.price">
