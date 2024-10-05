@@ -303,9 +303,6 @@
                 return str.includes('Windows')
             },
             getPlatformName(str){
-                if (!str) {
-                    return 'linux';
-                }
                 if (str.toLowerCase().includes('opensuse')) {
                     return 'openSUSE';
                 }

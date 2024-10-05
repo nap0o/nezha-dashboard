@@ -32,7 +32,8 @@
                 <i v-if='isWindowsPlatform(node.host.Platform)' class="windows icon"></i>
                 <i v-else-if='getFontLogoClass(node.host.Platform) == "" && node.stateuptime > 0' class="fl-tux"></i>
                 <i v-else :class="'fl-' + getFontLogoClass(node.host.Platform)"></i>
-                <span class="node-cell-os-text">@#getPlatformName(node.os)#@</span>
+                <span v-if="node.online && !getPlatformName(node.os)" class="node-cell-os-text">linux</span>
+                <span v-else>@#getPlatformName(node.os)#@</span>
             </td>
             <td style="text-align: center;" class="node-cell location">
                 <i :class="'fi fi-' + node.location"></i>
