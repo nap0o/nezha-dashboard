@@ -495,6 +495,11 @@ footer p {
     background-image: url(/static/theme-server-status/img/rb.png);
 }
 
+/* 地球旗 */
+.fi-ea {
+    background-image: url(/static-custom/img/ea.png);
+}
+
 @media only screen and (max-width: 767px) {
     body {
         font-size: 10px !important;
