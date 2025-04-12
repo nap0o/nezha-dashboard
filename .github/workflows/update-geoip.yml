@@ -1,0 +1,85 @@
+name: Release-update-geoip.db
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: true
+      matrix:
+        goos: [linux]
+        goarch: [amd64, arm64]
+
+    name: Build artifacts
+    runs-on: ubuntu-latest
+    container:
+      image: goreleaser/goreleaser-cross:v1.23
+    env:
+      GOOS: ${{ matrix.goos }}
+      GOARCH: ${{ matrix.goarch }}
+      GOARM: ${{ matrix.goarm }}
+    outputs:
+      tag_name: ${{ steps.extract_branch.outputs.tag }}
+    steps:
+      - run: git config --global --add safe.directory /__w/nezha-dashboard-diy/nezha-dashboard-diy 
+      - uses: actions/checkout@v4
+
+      - name: Fetch IPInfo GeoIP Database
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        env:
+          IPINFO_TOKEN: ${{ secrets.IPINFO_TOKEN }}
+        run: |
+          rm pkg/geoip/geoip.db
+          wget -qO pkg/geoip/geoip.db https://ipinfo.io/data/free/country.mmdb?token=${IPINFO_TOKEN}
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.x"
+
+      - name: Build
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          distribution: goreleaser
+          version: "~> v2"
+          args: build --single-target --clean --skip=validate
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-${{ env.GOOS }}-${{ env.GOARCH }}
+          path: |
+            ./dist/*/*
+
+  release:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    needs: build
+    name: Release
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./assets
+
+      - name: Archive and compress binaries
+        run: |
+          find assets/*/*/* -type f | while read -r file; do
+            chmod +x $file
+            dir=$(dirname "$file")
+            filename=$(basename "$file")
+            fileWithoutExt="${filename%.*}"
+            zip -jr "$dir/$fileWithoutExt.zip" "$file"
+          done
+
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "assets/*/*/*.zip"
+          generateReleaseNotes: true
+
+
